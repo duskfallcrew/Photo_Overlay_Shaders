@@ -1,22 +1,22 @@
 #include "ReShade.fxh"
 
-texture textureSampler < string name = "Texture Sampler"; >;
-texture overlayTexture < string name = "Overlay Texture"; >;
+texture textureSampler : TEXCOORD;
+texture overlayTexture : TEXCOORD;
 
 uniform int blendMode = 0;
 
 float4 main(float2 uv : TEXCOORD) : SV_Target
 {
     // Sample the texture
-    float4 textureColor = textureSampler.Sample(samplerLinear, uv);
+    float4 textureColor = tex2D(textureSampler, uv);
 
     // Sample the overlay texture
-    float4 overlayColor = overlayTexture.Sample(samplerLinear, uv);
+    float4 overlayColor = tex2D(overlayTexture, uv);
 
     // Apply the blend mode
     float4 blendedColor;
-    if (blendMode == 0) blendedColor = mul(textureColor, overlayColor); // Multiply
-    else if (blendMode == 1) blendedColor = screen(textureColor, overlayColor); // Screen
+    if (blendMode == 0) blendedColor = textureColor * overlayColor; // Multiply
+    else if (blendMode == 1) blendedColor = 1.0 - (1.0 - textureColor) * (1.0 - overlayColor); // Screen
     //... add more blending modes here...
 
     // Return the final color
