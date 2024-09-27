@@ -6,3 +6,9 @@ Yes, because I don't know how to code totally, I have enlisted help from an AI c
 If you know how to program, code these things feel free to commit to fixing this or forking it! 
 
 Noting it now the new version of the code is likely borrowing heavily from https://github.com/luluco250/FXShaders
+
+## Current Issues
+
+largely i just wanted a texture overlay LIKE overlay and Layer but this one's a bit wonky, and i'm not a coder, so we're getting there.
+
+The issue largely just is, it works it compiles but it -- doesn't do what i want.
