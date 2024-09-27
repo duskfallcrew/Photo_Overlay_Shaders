@@ -23,15 +23,15 @@ float4 main(float2 uv) : SV_Target
     return blendedColor;
 }
 
-technique Dusk's Photo Overlay
+technique DuskPhotoOverlay
 {
     pass p0
     {
         PixelShader = main;
     }
-    ui_tooltip = "A photo-like overlay effect created by Dusk.";
-    ui_label = "Blending Mode";
-    ui_combo_box = {
+
+    // Define the UI elements here
+    ui "Blending Mode" Combo Box {
         "Multiply" = 0,
         "Screen" = 1,
         "Overlay" = 2,
@@ -45,5 +45,5 @@ technique Dusk's Photo Overlay
         "LinearLight" = 10,
         "PinLight" = 11,
         "HardMix" = 12
-    };
+    }
 }
