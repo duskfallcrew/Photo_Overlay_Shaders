@@ -1,7 +1,7 @@
 #include "ReShade.fxh"
 
-uniform sampler2D textureSampler;
-uniform sampler2D overlayTexture;
+sampler2D textureSampler;
+sampler2D overlayTexture;
 
 uniform int blendMode = 0;
 
@@ -30,8 +30,8 @@ technique DuskPhotoOverlay
         PixelShader = main;
     }
 
-    // Define the UI elements here
-    ui "Blending Mode" Combo Box {
+    ui "Blending Mode" Combo Box
+    {
         "Multiply" = 0,
         "Screen" = 1,
         "Overlay" = 2,
