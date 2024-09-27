@@ -1,27 +1,17 @@
-#pragma target 3.0
-#pragma shader pixel
-
 #include "ReShade.fxh"
 
-// Define the texture samplers
-uniform sampler2D textureSampler : register(s0) = sampler_state {
-    Texture = (textureFile);
-};
-uniform sampler2D overlayTexture : register(s1) = sampler_state {
-    Texture = (textureFile);
-};
+uniform sampler2D textureSampler : register(s0);
+uniform sampler2D overlayTexture : register(s1);
 
-// Define the blending mode variable
 uniform int blendMode = 0;
 
-// Define the main shader function
-float4 main(float2 uv : TEXCOORD) : COLOR
+float4 main(float2 uv) : SV_Target
 {
     // Sample the texture
-    float4 textureColor = tex2Dlod(textureSampler, float4(uv, 0, 0));
+    float4 textureColor = tex2D(textureSampler, uv);
 
     // Sample the overlay texture
-    float4 overlayColor = tex2Dlod(overlayTexture, float4(uv, 0, 0));
+    float4 overlayColor = tex2D(overlayTexture, uv);
 
     // Apply the blend mode
     float4 blendedColor;
@@ -33,17 +23,14 @@ float4 main(float2 uv : TEXCOORD) : COLOR
     return blendedColor;
 }
 
-// Define the technique
-technique Dusk's Photo Overlay < ui_tooltip = "A photo-like overlay effect created by Dusk."; >
+technique Dusk's Photo Overlay
 {
     pass p0
     {
-        VertexShader = VSMain;
         PixelShader = main;
     }
 }
 
-// Define the UI for the blending mode
 ui "Blending Mode" Combo Box {
     "Multiply" = 0,
     "Screen" = 1,
