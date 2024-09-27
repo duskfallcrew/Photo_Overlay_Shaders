@@ -1,7 +1,7 @@
 #include "ReShade.fxh"
 
-uniform sampler2D textureSampler;
-uniform sampler2D overlayTexture;
+texture textureSampler < string name = "Texture Sampler"; >;
+texture overlayTexture < string name = "Overlay Texture"; >;
 
 uniform int blendMode = 0;
 
@@ -15,8 +15,8 @@ float4 main(float2 uv : TEXCOORD) : SV_Target
 
     // Apply the blend mode
     float4 blendedColor;
-    if (blendMode == 0) blendedColor = textureColor * overlayColor; // Multiply
-    else if (blendMode == 1) blendedColor = 1.0 - (1.0 - textureColor) * (1.0 - overlayColor); // Screen
+    if (blendMode == 0) blendedColor = mul(textureColor, overlayColor); // Multiply
+    else if (blendMode == 1) blendedColor = screen(textureColor, overlayColor); // Screen
     //... add more blending modes here...
 
     // Return the final color
