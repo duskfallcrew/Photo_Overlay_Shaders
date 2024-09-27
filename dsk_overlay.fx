@@ -1,7 +1,7 @@
 #include "ReShade.fxh"
 
-uniform sampler2D textureSampler : register(s0);
-uniform sampler2D overlayTexture : register(s1);
+uniform sampler2D textureSampler;
+uniform sampler2D overlayTexture;
 
 uniform int blendMode = 0;
 
@@ -29,20 +29,21 @@ technique Dusk's Photo Overlay
     {
         PixelShader = main;
     }
-}
-
-ui "Blending Mode" Combo Box {
-    "Multiply" = 0,
-    "Screen" = 1,
-    "Overlay" = 2,
-    "SoftLight" = 3,
-    "HardLight" = 4,
-    "ColorDodge" = 5,
-    "ColorBurn" = 6,
-    "LinearDodge" = 7,
-    "LinearBurn" = 8,
-    "VividLight" = 9,
-    "LinearLight" = 10,
-    "PinLight" = 11,
-    "HardMix" = 12
+    ui_tooltip = "A photo-like overlay effect created by Dusk.";
+    ui_label = "Blending Mode";
+    ui_combo_box = {
+        "Multiply" = 0,
+        "Screen" = 1,
+        "Overlay" = 2,
+        "SoftLight" = 3,
+        "HardLight" = 4,
+        "ColorDodge" = 5,
+        "ColorBurn" = 6,
+        "LinearDodge" = 7,
+        "LinearBurn" = 8,
+        "VividLight" = 9,
+        "LinearLight" = 10,
+        "PinLight" = 11,
+        "HardMix" = 12
+    };
 }
