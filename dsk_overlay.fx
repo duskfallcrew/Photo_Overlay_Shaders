@@ -1,13 +1,7 @@
 #include "ReShade.fxh"
 
-sampler2D textureSampler : register(s0) = sampler_state
-{
-    Texture = (textureFile);
-};
-sampler2D overlayTexture : register(s1) = sampler_state
-{
-    Texture = (textureFile);
-};
+uniform sampler2D textureSampler;
+uniform sampler2D overlayTexture;
 
 uniform int blendMode = 0;
 
@@ -33,7 +27,7 @@ technique DuskPhotoOverlay
 {
     pass p0
     {
-        VertexShader = VSMain;
+        VertexShader = PostProcessVS;
         PixelShader = main;
     }
 
@@ -53,9 +47,4 @@ technique DuskPhotoOverlay
         "PinLight" = 11,
         "HardMix" = 12
     }
-}
-
-float4 VSMain(float4 pos : POSITION) : SV_POSITION
-{
-    return pos;
 }
