@@ -1,17 +1,27 @@
 #include "ReShade.fxh"
 
-texture textureSampler : TEXCOORD;
-texture overlayTexture : TEXCOORD;
+texture2D textureSampler : TEXCOORD;
+texture2D overlayTexture : TEXCOORD;
+
+sampler2D samplerLinear
+{
+    Texture = textureSampler;
+    AddressU = CLAMP;
+    AddressV = CLAMP;
+    MagFilter = LINEAR;
+    MinFilter = LINEAR;
+    MipFilter = LINEAR;
+};
 
 uniform int blendMode = 0;
 
 float4 main(float2 uv : TEXCOORD) : SV_Target
 {
     // Sample the texture
-    float4 textureColor = tex2D(textureSampler, uv);
+    float4 textureColor = samplerLinear.Sample(samplerLinear, uv);
 
     // Sample the overlay texture
-    float4 overlayColor = tex2D(overlayTexture, uv);
+    float4 overlayColor = overlayTexture.Sample(samplerLinear, uv);
 
     // Apply the blend mode
     float4 blendedColor;
@@ -33,7 +43,7 @@ technique DuskPhotoOverlay
 
     ui "Blending Mode" Combo Box
     {
-        "Multiply" = 0,
+        " Multiply" = 0,
         "Screen" = 1,
         "Overlay" = 2,
         "SoftLight" = 3,
