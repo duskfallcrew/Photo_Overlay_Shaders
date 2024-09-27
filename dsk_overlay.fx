@@ -8,10 +8,10 @@ uniform int blendMode = 0;
 float4 main(float2 uv : TEXCOORD) : SV_Target
 {
     // Sample the texture
-    float4 textureColor = tex2D(textureSampler, uv);
+    float4 textureColor = textureSampler.Sample(samplerLinear, uv);
 
     // Sample the overlay texture
-    float4 overlayColor = tex2D(overlayTexture, uv);
+    float4 overlayColor = overlayTexture.Sample(samplerLinear, uv);
 
     // Apply the blend mode
     float4 blendedColor;
