@@ -4,3 +4,5 @@ A selection or a start of Reshade style shaders to do with simple photography ov
 Yes, because I don't know how to code totally, I have enlisted help from an AI chat service - but because I'm aware of the syntax, we'll be testing this along the way.
 
 If you know how to program, code these things feel free to commit to fixing this or forking it! 
+
+Noting it now the new version of the code is likely borrowing heavily from https://github.com/luluco250/FXShaders
